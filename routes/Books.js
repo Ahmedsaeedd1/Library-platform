@@ -285,6 +285,4 @@ router.get( "/:Id" ,
 );
 
 
-module.exports = router ;
-//imoknmklnlnkl
-const xcxzc=100 ;
+
