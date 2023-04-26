@@ -47,7 +47,7 @@ async(req,res)=>{
             },],
         });
     }
-    // prepare question object
+    // prepare book object
     const book={
         Title: req.body.Title,
         Racknumber: req.body.Racknumber,
