@@ -100,7 +100,7 @@ async(req,res)=>{
     if (!errors.isEmpty()){
         return res.status(400).json({error:errors.array()});
     }
-    // 2- check if question exist
+    // 2- check if book exist
     const book = await query("select * from book where Id= ? ",[req.params.Id]);
     if (!book[0]){
         res.status(404).json({
@@ -108,7 +108,7 @@ async(req,res)=>{
         });
     }
 
-    //3- prepare question object
+    //3- prepare book object
     const BooKObj={
         Title: req.body.Title,
         Racknumber: req.body.Racknumber,
@@ -123,7 +123,7 @@ async(req,res)=>{
         //delete old image
         fs.unlinkSync("./upload/"+book[0].Photo)
     }
-    //update question
+    //update book
         await query("update book set ? where Id =?",
         [
             BooKObj,
