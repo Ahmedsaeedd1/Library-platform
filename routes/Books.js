@@ -163,21 +163,19 @@ async(req,res)=>{
     }
 });
 
-// filter by isbn & racknumber [user , admin]
-router.get( "/filter" , 
+// filter by isbn  [admin]
+router.get( "/filterByracknum" , 
 admin,
 
  async(req ,res)=>{
     const query =util.promisify(conn.query).bind(conn);
-    let ISBN = "" ;
     let Racknumber = "";
 
-    if(req.query.ISBN && req.query.Racknumber){
+    if( req.query.Racknumber){
         // query params
-        ISBN =  `where ISBN LIKE '%${req.query.ISBN}%' `;
         Racknumber = `AND Racknumber LIKE'%${req.query.Racknumber}%' `;
 
-      const books = await query(` select * from book ${ISBN} ${Racknumber} `);
+      const books = await query(` select * from book  ${Racknumber} `);
       books.map (book =>{
           book.Photo = "http://" + req.hostname +  ":4000/" + book.Photo;
       });
@@ -189,7 +187,33 @@ admin,
       res.status(200).json(books);
     }
     else{
-        res.status(500).json({msg: "u must enter the both rack number and ISBN" });
+        res.status(500).json({msg: "you must enter rack number" });
+    }
+ }
+);
+router.get( "/filterByISBN" , 
+admin,
+
+ async(req ,res)=>{
+    const query =util.promisify(conn.query).bind(conn);
+    let ISBN = "" ;
+    if(req.query.ISBN ){
+        // query params
+        ISBN =  `where ISBN LIKE '%${req.query.ISBN}%' `;
+
+      const books = await query(` select * from book ${ISBN}  `);
+      books.map (book =>{
+          book.Photo = "http://" + req.hostname +  ":4000/" + book.Photo;
+      });
+      if (!books[0]){
+        res.status(404).json({msg : "book not found"});
+    }
+        
+        
+      res.status(200).json(books);
+    }
+    else{
+        res.status(500).json({msg: "you must enter the ISBN" });
     }
  }
 );
@@ -211,7 +235,7 @@ router.get( "/searchUser" ,
     if(req.query.Author || req.query.Category || req.query.Racknumber || req.query.Id || req.query.Title
         || req.query.ISBN ){
         // query params
-        SearchByAttribute =  `where ISBN LIKE '%${req.query.ISBN}%' 
+        SearchByAttribute =  `where ISBN LIKE '%${req.query.ISBN}%'   
         OR Racknumber LIKE '%${req.query.Racknumber}%'
         OR Author LIKE'%${req.query.Author}%'
         OR Category LIKE'%${req.query.Category}%'
