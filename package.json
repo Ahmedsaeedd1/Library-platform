@@ -1,0 +1,33 @@
+{
+  "name": "library-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "build": "node index"
+  }
+  ,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmedsaeedd1/Library-platform.git"
+  }
+  ,
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahmedsaeedd1/Library-platform/issues"
+  }
+  ,
+  "homepage": "https://github.com/Ahmedsaeedd1/Library-platform#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
+  }
+}
