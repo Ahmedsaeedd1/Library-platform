@@ -285,13 +285,6 @@ router.get( "/:Id" ,
 );
 
 
-router.post( "/review" ,
- (req ,res)=>{
-    res.status(200).json({
-        msg :"review added" ,
-    })
- }
-);
 module.exports = router ;
 //imoknmklnlnkl
 const xcxzcx=0 ;
